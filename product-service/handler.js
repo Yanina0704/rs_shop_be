@@ -34,7 +34,7 @@ exports.getProductsById = async (event) => {
     }];
     productId = event['pathParameters']['productId'];
     product = products.find((element) => element["id"] == productId);
-    if (product == "undefined")
+    if (!product)
       {
         return {
           statusCode: 404,
@@ -43,7 +43,7 @@ exports.getProductsById = async (event) => {
             "Access-Control-Allow-Methods": "GET",
             "Content-Type": "application/json"
           },
-          body: JSON.stringify("Product doesn't found!"),
+          body: JSON.stringify({title: "Product doesn't found!"}),
         }}
         else {
           return {
